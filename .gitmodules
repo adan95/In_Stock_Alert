@@ -1,0 +1,3 @@
+[submodule "in-stock-pipeline"]
+	path = in-stock-pipeline
+	url = https://git.heroku.com/in-stock-p.git
