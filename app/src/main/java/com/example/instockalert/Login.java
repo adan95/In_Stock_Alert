@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,15 +35,14 @@ public class Login extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.signInButton);
         signUpButton = (Button) findViewById(R.id.signUpButton);
 
-        setButtons();
+        setButtonListeners();
     }
 
-    private void setButtons() {
+    private void setButtonListeners() {
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Login.this, "This will go to the forgot password page!", Toast.LENGTH_LONG).show();
-
 //                Intent intent = new Intent(v.getContext(), ForgotPassword.class);
 //                startActivity(intent);
             }
@@ -51,6 +51,13 @@ public class Login extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+
+                // TODO: Set/Check input validation
+
+
+
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -59,9 +66,8 @@ public class Login extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Login.this, "This will go to the sign up page!", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(v.getContext(), SignUp.class);
-//                startActivity(intent);
+                Intent intent = new Intent(v.getContext(), SignUp.class);
+                startActivity(intent);
             }
         });
     }
