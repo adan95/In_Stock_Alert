@@ -11,4 +11,10 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="verify">Verify your email</string>
+    <string name="verified">Verified!</string>
+    <string name="verify_success">You have successfully verified your account!</string>
+    <string name="verify_reason">Almost there! A verification email has been sent to %1$s</string>
+    <string name="resend_email">Resend email</string>
+    <string name="dashboard">Go to dashboard</string>
 </resources>

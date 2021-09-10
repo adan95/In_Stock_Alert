@@ -1,15 +1,23 @@
 package com.example.instockalert;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
@@ -19,6 +27,8 @@ public class Login extends AppCompatActivity {
     private Button signInButton;
     private Button signUpButton;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,21 @@ public class Login extends AppCompatActivity {
         forgotPasswordTextView = (TextView) findViewById(R.id.forgotPasswordTextView);
         signInButton = (Button) findViewById(R.id.signInButton);
         signUpButton = (Button) findViewById(R.id.signUpButton);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        // ============= FOR TESTING =====================
+//        String email = "charrisse.porter581@myci.csuci.edu";
+//        String password = "@Abcdef12";
+//
+//        emailEditText.setText(email);
+//        passwordEditText.setText(password);
+
+        // ============= FOR TESTING =====================
+
+
+
+
 
         setButtonListeners();
     }
@@ -56,10 +81,8 @@ public class Login extends AppCompatActivity {
 
                 // TODO: Set/Check input validation
 
+                signInUser(email, password);
 
-
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -70,5 +93,37 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void signInUser(String email, String password) {
+        String TAG = "success";
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            //updateUI(user);
+
+                            if(user.isEmailVerified()) {
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(Login.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+                    }
+                });
     }
 }

@@ -54,18 +54,18 @@ public class SignUp extends AppCompatActivity {
         signUpButton = (Button) findViewById(R.id.signUpButton);
 
         // ============= FOR TESTING =====================
-        String firstName = "Charrisse";
-        String lastName = "Porter";
-        String email = "charrisse.porter581@myci.csuci.edu";
-        String phoneNumber = "1234567890";
-        String password = "@Abcdef12";
-
-
-        firstNameEditText.setText(firstName);
-        lastNameEditText.setText(lastName);
-        emailEditText.setText(email);
-        phoneNumberEditText.setText(phoneNumber);
-        passwordEditText.setText(password);
+//        String firstName = "Charrisse";
+//        String lastName = "Porter";
+//        String email = "charrisse.porter581@myci.csuci.edu";
+//        String phoneNumber = "1234567890";
+//        String password = "@Abcdef12";
+//
+//
+//        firstNameEditText.setText(firstName);
+//        lastNameEditText.setText(lastName);
+//        emailEditText.setText(email);
+//        phoneNumberEditText.setText(phoneNumber);
+//        passwordEditText.setText(password);
 
         // ============= FOR TESTING =====================
 
@@ -89,15 +89,9 @@ public class SignUp extends AppCompatActivity {
 
                 if (validUserInput) {
                     authenticateUser(email, password, firstName, lastName);
-                    Toast.makeText(SignUp.this, "This will go to the email verification page!", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(v.getContext(), EmailVerification.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(v.getContext(), EmailVerification.class);
+                    startActivity(intent);
                 }
-
-
-
-//                Intent intent = new Intent(v.getContext(), MainActivity.class);
-//                startActivity(intent);
             }
         });
     }
@@ -108,12 +102,28 @@ public class SignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     setUserDisplayName(firstName, lastName);
+                    sendVerificationEmail();
                 }
                 else {
                     Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void sendVerificationEmail() {
+        String TAG = "success";
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                        }
+                    }
+                });
     }
 
     private void setUserDisplayName(String firstName, String lastName) {
