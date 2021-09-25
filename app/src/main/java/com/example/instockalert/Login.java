@@ -38,13 +38,15 @@ public class Login extends AppCompatActivity {
         setButtonListeners();
     }
 
+
+
     private void setButtonListeners() {
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Login.this, "This will go to the forgot password page!", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(v.getContext(), ForgotPassword.class);
-//                startActivity(intent);
+                Intent intent = new Intent(v.getContext(), ForgotPassword.class);
+                startActivity(intent);
             }
         });
 

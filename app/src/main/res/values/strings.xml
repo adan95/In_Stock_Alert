@@ -11,4 +11,9 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="email_instruction">Enter your registered email below to receive password reset instruction.</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="forgot_email">Email</string>
+    <string name="letter">emailSymbol</string>
 </resources>
