@@ -37,25 +37,25 @@ public class HomeFragment extends Fragment {
         info = new ArrayList<>();
         image = new ArrayList<>();
         type.add("GPU 1");
-        info.add("Nope");
+        info.add("In Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 2");
-        info.add("Nope");
+        info.add("In Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 3");
-        info.add("Nope");
+        info.add("In Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 4");
-        info.add("Nope");
+        info.add("Out of Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 5");
-        info.add("Nope");
+        info.add("Out of Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 6");
-        info.add("Nope");
+        info.add("In Stock");
         image.add(R.drawable.gpu_test);
         type.add("GPU 7");
-        info.add("Nope");
+        info.add("In Stock");
         image.add(R.drawable.gpu_test);
 
         // 1. get a reference to recyclerView
